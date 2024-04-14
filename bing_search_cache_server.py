@@ -54,7 +54,7 @@ def bing_search(
 
         # call the API
         try:
-            response = requests.get(endpoint, headers=headers, params=params)
+            response = requests.get(endpoint, headers=headers, params=params, timeout=60)
             response.raise_for_status()
             result = response.json()
             cache[query] = result
