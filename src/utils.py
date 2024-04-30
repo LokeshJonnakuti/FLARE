@@ -1,5 +1,4 @@
 from typing import Any, List, Dict
-import random
 import time
 import os
 import logging
@@ -7,6 +6,8 @@ import copy
 import string
 import asyncio
 import openai
+import secrets
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -91,7 +92,7 @@ def retry_with_exponential_backoff(
                     raise Exception(f'maximum number of retries ({max_retries}) exceeded.')
 
                 # incremental delay
-                delay *= exponential_base * (1 + jitter * random.random())
+                delay *= exponential_base * (1 + jitter * secrets.SystemRandom().random())
                 logging.info(f'retry on {e}, sleep for {const_delay + delay}')
                 time.sleep(const_delay + delay)
 

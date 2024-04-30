@@ -1,6 +1,5 @@
 from typing import List, Tuple, Union, Dict
 import argparse
-import random
 import json
 import time
 import glob
@@ -14,6 +13,7 @@ import torch
 from beir.datasets.data_loader import GenericDataLoader
 from src.datasets import WikiMultiHopQA, WikiAsp, ASQA
 from src.utils import Utils
+import secrets
 
 
 def eval(
@@ -357,7 +357,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # set random seed to make sure the same examples are sampled across multiple runs
-    random.seed(2022)
+    secrets.SystemRandom().seed(2022)
 
     if args.task == 'eval':
         dataset = args.dataset
