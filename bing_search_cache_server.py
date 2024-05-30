@@ -1,11 +1,11 @@
 from typing import List
-import json
 import os
-import requests
 import logging
 from ratelimit import limits, sleep_and_retry
 from flask import Flask, request, jsonify
 from diskcache import Cache
+from security import safe_requests
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -54,7 +54,7 @@ def bing_search(
 
         # call the API
         try:
-            response = requests.get(endpoint, headers=headers, params=params)
+            response = safe_requests.get(endpoint, headers=headers, params=params)
             response.raise_for_status()
             result = response.json()
             cache[query] = result
