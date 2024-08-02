@@ -1,6 +1,5 @@
 from typing import List, Dict, Any, Tuple, Union, Set
 import argparse
-import random
 import numpy as np
 import logging
 from tqdm import tqdm
@@ -17,6 +16,8 @@ from .retriever import BM25
 from .templates import CtxPrompt, ApiReturn, RetrievalInstruction
 from .datasets import StrategyQA, WikiMultiHopQA, WikiAsp, ASQA
 from .utils import Utils, NoKeyAvailable, openai_api_call
+import secrets
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -641,7 +642,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
     args.multiprocess = len(args.openai_keys) > 1
-    random.seed(args.seed)
+    secrets.SystemRandom().seed(args.seed)
     np.random.seed(args.seed)
 
     # init tokenizer for truncation
