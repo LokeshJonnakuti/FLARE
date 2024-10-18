@@ -19,7 +19,7 @@ def search_bing_api(
     data = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
     # sent request
-    response = requests.request('POST', api_url, headers=headers, data=data)
+    response = requests.request('POST', api_url, headers=headers, data=data, timeout=60)
     response = response.json()
     results: List[Dict] = []
     # collect results
